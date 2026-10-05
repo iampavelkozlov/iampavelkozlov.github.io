@@ -11,6 +11,8 @@
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#ffffff" />
 
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./favicon.png" />
     <link rel="canonical" href="https://iampavelkozlov.github.io/" />
     <link
       rel="alternate"
@@ -21,7 +23,8 @@
 
     <meta property="og:type" content="profile" />
     <meta property="og:locale" content="ru_RU" />
-    <meta property="og:title" content="Павел Козлов — Senior Software Engineer" />
+    <meta property="og:site_name" content="Павел Козлов" />
+    <meta property="og:title" content="Павел Козлов — Senior Go-разработчик" />
     <meta
       property="og:description"
       content="Senior Software Engineer с 7-летним опытом, 6 лет коммерческой разработки на Go."
@@ -32,7 +35,7 @@
     <meta property="profile:last_name" content="Козлов" />
 
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Павел Козлов — Senior Software Engineer" />
+    <meta name="twitter:title" content="Павел Козлов — Senior Go-разработчик" />
     <meta
       name="twitter:description"
       content="Senior Software Engineer с 7-летним опытом, 6 лет коммерческой разработки на Go."
@@ -42,39 +45,55 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfilePage",
-        "url": "https://iampavelkozlov.github.io/",
-        "name": "Павел Козлов — Senior Software Engineer",
-        "description": "Резюме Senior Software Engineer и Go Developer Павла Козлова.",
-        "mainEntity": {
-          "@type": "Person",
-          "@id": "https://iampavelkozlov.github.io/#pavel-kozlov",
-          "name": "Павел Козлов",
-          "jobTitle": "Senior Software Engineer / Go Developer",
-          "url": "https://iampavelkozlov.github.io/",
-          "image": "https://iampavelkozlov.github.io/profile.png",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Москва",
-            "addressCountry": "RU"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://iampavelkozlov.github.io/#website",
+            "url": "https://iampavelkozlov.github.io/",
+            "name": "Павел Козлов",
+            "alternateName": "Pavel Kozlov",
+            "inLanguage": "ru-RU"
           },
-          "sameAs": [
-            "https://t.me/pav_kozlov",
-            "https://leetcode.com/u/user4840t/"
-          ],
-          "knowsAbout": [
-            "Go",
-            "PostgreSQL",
-            "Kafka",
-            "Redis",
-            "gRPC",
-            "Microservices",
-            "Distributed Systems"
-          ]
-        }
+          {
+            "@type": "ProfilePage",
+            "url": "https://iampavelkozlov.github.io/",
+            "name": "Павел Козлов — Senior Go-разработчик",
+            "description": "Резюме Senior Software Engineer и Go Developer Павла Козлова.",
+            "isPartOf": {
+              "@id": "https://iampavelkozlov.github.io/#website"
+            },
+            "mainEntity": {
+              "@type": "Person",
+              "@id": "https://iampavelkozlov.github.io/#pavel-kozlov",
+              "name": "Павел Козлов",
+              "alternateName": "Pavel Kozlov",
+              "jobTitle": "Senior Software Engineer / Go Developer",
+              "url": "https://iampavelkozlov.github.io/",
+              "image": "https://iampavelkozlov.github.io/profile.png",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Москва",
+                "addressCountry": "RU"
+              },
+              "sameAs": [
+                "https://t.me/pav_kozlov",
+                "https://leetcode.com/u/user4840t/"
+              ],
+              "knowsAbout": [
+                "Go",
+                "PostgreSQL",
+                "Kafka",
+                "Redis",
+                "gRPC",
+                "Microservices",
+                "Distributed Systems"
+              ]
+            }
+          }
+        ]
       }
     </script>
-    <title>Павел Козлов — Senior Software Engineer</title>
+    <title>Павел Козлов — Senior Go-разработчик</title>
   </head>
   <body>
     <div id="app"></div>
