@@ -8,6 +8,7 @@ import {
   Send,
 } from '@lucide/vue'
 import type { Component } from 'vue'
+import { reachGoal } from '../lib/analytics'
 import type { Contact } from '../types/cv'
 
 defineProps<{
@@ -26,6 +27,15 @@ const icons: Record<Contact['icon'], Component> = {
 }
 
 const isExternal = (href?: string) => Boolean(href?.startsWith('http'))
+
+const contactGoal = (contact: Contact) => {
+  if (contact.href?.startsWith('tel:')) return 'phone_click'
+  if (contact.href?.startsWith('mailto:')) return 'email_click'
+  if (contact.href?.includes('t.me/')) return 'telegram_click'
+  if (contact.href?.includes('leetcode.com/')) return 'leetcode_click'
+
+  return 'contact_link_click'
+}
 </script>
 
 <template>
@@ -47,6 +57,7 @@ const isExternal = (href?: string) => Boolean(href?.startsWith('http'))
           :href="contact.href"
           :target="isExternal(contact.href) ? '_blank' : undefined"
           :rel="isExternal(contact.href) ? 'noreferrer' : undefined"
+          @click="reachGoal(contactGoal(contact))"
         >
           <component :is="icons[contact.icon]" :size="17" :stroke-width="1.9" />
           <span>{{ contact.label }}</span>
