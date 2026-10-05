@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iampavelkozlov.github.io/sitemap.xml
