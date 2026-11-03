@@ -3,6 +3,7 @@ import CvHeader from './CvHeader.vue'
 import DownloadButton from './DownloadButton.vue'
 import ExperienceEntry from './ExperienceEntry.vue'
 import SectionTitle from './SectionTitle.vue'
+import ThemeToggle from './ThemeToggle.vue'
 import type { CvData } from '../types/cv'
 
 defineProps<{ cv: CvData; now: Date }>()
@@ -14,6 +15,7 @@ const assetUrl = (fileName: string) => `${import.meta.env.BASE_URL}${fileName}`
   <div class="page-shell">
     <header class="page-actions" aria-label="Действия с резюме">
       <DownloadButton :href="assetUrl('CV.pdf')" />
+      <ThemeToggle />
     </header>
 
     <main class="resume" aria-labelledby="resume-name">
