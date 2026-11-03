@@ -115,6 +115,8 @@ ul {
 
 .download-link:focus-visible,
 .theme-toggle:focus-visible,
+.portrait-trigger:focus-visible,
+.portrait-close:focus-visible,
 .company-link:focus-visible,
 .site-footer a:focus-visible,
 .contact:focus-visible {
@@ -196,6 +198,85 @@ ul {
   object-fit: cover;
   object-position: center 38%;
   border-radius: 22px;
+}
+
+.portrait-trigger {
+  position: relative;
+  grid-column: 1;
+  grid-row: 1 / 4;
+  width: 90px;
+  height: 120px;
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.portrait-trigger .portrait { display: block; }
+.portrait-print { display: none; }
+
+.portrait-zoom {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 23px;
+  height: 23px;
+  padding: 4px;
+  border-radius: 50%;
+  color: white;
+  background: rgb(23 23 23 / 65%);
+  opacity: 0;
+}
+
+.portrait-trigger:hover .portrait-zoom,
+.portrait-trigger:focus-visible .portrait-zoom { opacity: 1; }
+
+.portrait-dialog {
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 32px);
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: 0 24px 90px rgb(0 0 0 / 35%);
+}
+
+.portrait-dialog::backdrop {
+  background: rgb(0 0 0 / 72%);
+  backdrop-filter: blur(5px);
+}
+
+.portrait-dialog[open] { display: flex; }
+
+.portrait-large {
+  display: block;
+  width: auto;
+  max-width: min(560px, calc(100vw - 54px));
+  max-height: calc(100dvh - 54px);
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.portrait-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--paper);
+  cursor: pointer;
+}
+
+@media (hover: none) {
+  .portrait-zoom { opacity: 1; }
 }
 
 .identity-copy h1 {
@@ -295,6 +376,30 @@ ul {
   margin-top: 4px;
 }
 
+.technology-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.technology-tags li {
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--meta);
+  background: color-mix(in srgb, var(--paper) 80%, var(--canvas));
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+.experience-timeline {
+  padding-left: 20px;
+  border-left: 1px solid var(--line);
+}
+
 .experience-section .section-title {
   margin-bottom: 18px;
 }
@@ -341,10 +446,10 @@ ul {
   flex: 0 0 auto;
 }
 
-.experience-company { font-weight: 600; }
+.experience-company { font-size: 15px; font-weight: 600; }
 
 .experience-period {
-  flex: 1 1 200px;
+  flex: 1 1 180px;
   flex-wrap: wrap;
   gap: 6px 8px;
   color: var(--muted);
@@ -427,6 +532,7 @@ ul {
     row-gap: 16px;
   }
 
+  .portrait-trigger,
   .portrait {
     grid-row: 1;
     width: 78px;
@@ -459,6 +565,8 @@ ul {
     margin-top: 31px;
   }
 
+  .experience-timeline { padding-left: 14px; }
+
   .experience {
     padding-block: 24px;
   }
@@ -479,6 +587,7 @@ ul {
     column-gap: 15px;
   }
 
+  .portrait-trigger,
   .portrait {
     width: 70px;
     height: 94px;
@@ -544,6 +653,8 @@ ul {
   .page-actions { display: none; }
   .resume { padding: 0; box-shadow: none; }
   .cv-header { grid-template-columns: 60px minmax(0, 1fr); column-gap: 20px; row-gap: 8px; margin-bottom: 17px; }
+  .portrait-trigger, .portrait-dialog { display: none !important; }
+  .portrait-print { display: block; }
   .portrait { grid-row: 1 / 4; width: 60px; height: 80px; border-radius: 12px; }
   .identity-copy h1 { font-size: 30px; }
   .role { margin-top: 8px; font-size: 10px; }
@@ -556,10 +667,15 @@ ul {
   .profile-copy { gap: 10px; }
   .profile-copy p, .stack-block p, .company-description, .experience li, .additional-grid p { font-size: 9pt; line-height: 1.4; }
   .stack-block { margin-top: 12px; }
+  .technology-tags { display: block; margin-top: 4px; padding: 0; font-size: 9pt; line-height: 1.4; color: var(--muted); }
+  .technology-tags li { display: inline; margin: 0; padding: 0; border: 0; border-radius: 0; color: inherit; background: none; font-size: inherit; line-height: inherit; }
+  .technology-tags li:not(:last-child)::after { content: ', '; }
+  .experience-timeline { padding: 0; border: 0; }
   .stack-block h3, .experience-groups h4 { font-size: 9pt; break-after: avoid; }
   .experience { padding-block: 14px; }
   .experience-header { gap: 6px; break-after: avoid; }
   .experience-context { gap: 6px 12px; }
+  .experience-period { flex-basis: 200px; }
   .experience-header h3 { font-size: 17px; }
   .experience-meta { font-size: 10px; }
   .experience-period { font-size: 10px; }

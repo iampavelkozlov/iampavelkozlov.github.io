@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import ContactRow from './ContactRow.vue'
+import PortraitPhoto from './PortraitPhoto.vue'
 import type { Contact } from '../types/cv'
 
 const props = defineProps<{
@@ -17,7 +18,7 @@ const profiles = computed(() => props.contacts.filter(isProfile))
 
 <template>
   <header class="cv-header">
-    <img class="portrait" :src="photoSrc" :alt="`Фотография ${name}`" />
+    <PortraitPhoto :src="photoSrc" :name="name" />
 
     <div class="identity-copy">
       <h1 id="resume-name">{{ name }}</h1>

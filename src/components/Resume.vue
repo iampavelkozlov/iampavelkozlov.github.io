@@ -34,18 +34,22 @@ const assetUrl = (fileName: string) => `${import.meta.env.BASE_URL}${fileName}`
 
         <div class="stack-block">
           <h3>Стек технологий</h3>
-          <p>{{ cv.technologyStack.join(', ') }}</p>
+          <ul class="technology-tags" aria-label="Стек технологий">
+            <li v-for="technology in cv.technologyStack" :key="technology">{{ technology }}</li>
+          </ul>
         </div>
       </section>
 
       <section class="resume-section experience-section">
         <SectionTitle>Опыт работы</SectionTitle>
-        <ExperienceEntry
-          v-for="experience in cv.experience"
-          :key="`${experience.company}-${experience.startDate}`"
-          :experience="experience"
-          :now="now"
-        />
+        <div class="experience-timeline">
+          <ExperienceEntry
+            v-for="experience in cv.experience"
+            :key="`${experience.company}-${experience.startDate}`"
+            :experience="experience"
+            :now="now"
+          />
+        </div>
       </section>
 
       <section class="resume-section additional-section">
