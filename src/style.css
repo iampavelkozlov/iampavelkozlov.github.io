@@ -18,6 +18,13 @@
   --link-line: #b8b8b3;
   --toolbar: rgb(255 255 255 / 92%);
   --shadow: 0 18px 56px rgb(0 0 0 / 10%);
+  --text-body: 14.25px;
+  --body-leading: 1.46;
+  --text-label: 14px;
+  --text-meta: 13.5px;
+  --text-caption: 12.5px;
+  --text-small: 12px;
+  --text-company: 15px;
   color-scheme: light;
   font-family: 'Inter', sans-serif;
   color: var(--ink);
@@ -139,7 +146,9 @@ ul {
   cursor: pointer;
 }
 
-.theme-toggle:hover { background: var(--canvas); }
+.theme-toggle:hover {
+  background: var(--canvas);
+}
 
 .company-logo {
   flex: 0 0 auto;
@@ -154,18 +163,22 @@ ul {
   text-underline-offset: 3px;
 }
 
-.company-link:hover { text-decoration-color: currentColor; }
+.company-link:hover {
+  text-decoration-color: currentColor;
+}
 
 .site-footer {
   margin-top: 25px;
   padding-inline: 12px;
   color: var(--subtle);
   text-align: center;
-  font-size: 12px;
+  font-size: var(--text-small);
   line-height: 1.6;
 }
 
-.site-footer a { text-underline-offset: 3px; }
+.site-footer a {
+  text-underline-offset: 3px;
+}
 
 .resume {
   width: 100%;
@@ -175,10 +188,15 @@ ul {
 }
 
 .cv-header {
+  --portrait-width: 90px;
+  --portrait-height: 120px;
+  --portrait-radius: 22px;
+  --portrait-gap: 28px;
+  --portrait-row: 1 / 4;
   display: grid;
-  grid-template-columns: 90px minmax(0, 1fr);
+  grid-template-columns: var(--portrait-width) minmax(0, 1fr);
   align-items: start;
-  column-gap: 28px;
+  column-gap: var(--portrait-gap);
   row-gap: 12px;
   margin-bottom: 28px;
 }
@@ -189,32 +207,34 @@ ul {
   min-width: 0;
 }
 
-.portrait {
+.portrait,
+.portrait-trigger {
   grid-column: 1;
-  grid-row: 1 / 4;
-  width: 90px;
-  height: 120px;
-  flex: 0 0 auto;
+  grid-row: var(--portrait-row);
+  width: var(--portrait-width);
+  height: var(--portrait-height);
+  border-radius: var(--portrait-radius);
+}
+
+.portrait {
   object-fit: cover;
   object-position: center 38%;
-  border-radius: 22px;
 }
 
 .portrait-trigger {
   position: relative;
-  grid-column: 1;
-  grid-row: 1 / 4;
-  width: 90px;
-  height: 120px;
   padding: 0;
   border: 0;
-  border-radius: 22px;
   background: transparent;
   cursor: zoom-in;
 }
 
-.portrait-trigger .portrait { display: block; }
-.portrait-print { display: none; }
+.portrait-trigger .portrait {
+  display: block;
+}
+.portrait-print {
+  display: none;
+}
 
 .portrait-zoom {
   position: absolute;
@@ -230,7 +250,9 @@ ul {
 }
 
 .portrait-trigger:hover .portrait-zoom,
-.portrait-trigger:focus-visible .portrait-zoom { opacity: 1; }
+.portrait-trigger:focus-visible .portrait-zoom {
+  opacity: 1;
+}
 
 .portrait-dialog {
   max-width: calc(100vw - 32px);
@@ -247,7 +269,9 @@ ul {
   backdrop-filter: blur(5px);
 }
 
-.portrait-dialog[open] { display: flex; }
+.portrait-dialog[open] {
+  display: flex;
+}
 
 .portrait-large {
   display: block;
@@ -276,7 +300,9 @@ ul {
 }
 
 @media (hover: none) {
-  .portrait-zoom { opacity: 1; }
+  .portrait-zoom {
+    opacity: 1;
+  }
 }
 
 .identity-copy h1 {
@@ -288,7 +314,7 @@ ul {
 
 .role {
   margin-top: 13px;
-  font-size: 14px;
+  font-size: var(--text-label);
   line-height: 1.25;
   font-weight: 700;
   letter-spacing: 0.105em;
@@ -305,8 +331,12 @@ ul {
   font-style: normal;
 }
 
-.contacts-direct { grid-row: 2; }
-.contacts-profiles { grid-row: 3; }
+.contacts-direct {
+  grid-row: 2;
+}
+.contacts-profiles {
+  grid-row: 3;
+}
 
 .contact {
   display: inline-flex;
@@ -314,22 +344,14 @@ ul {
   gap: 7px;
   min-width: 0;
   color: var(--contact);
-  font-size: 13.5px;
+  font-size: var(--text-meta);
   line-height: 1.2;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
 
-.contact--plain {
-  text-decoration: none;
-}
-
 .contact svg {
   flex: 0 0 auto;
-}
-
-.external-mark {
-  display: none;
 }
 
 .resume-section + .resume-section {
@@ -338,7 +360,7 @@ ul {
 
 .section-title {
   margin-bottom: 21px;
-  font-size: 14px;
+  font-size: var(--text-label);
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: 0.19em;
@@ -351,13 +373,12 @@ ul {
 }
 
 .profile-copy p,
-.stack-block p,
 .company-description,
 .experience li,
 .additional-grid p {
   color: var(--muted);
-  font-size: 14.25px;
-  line-height: 1.46;
+  font-size: var(--text-body);
+  line-height: var(--body-leading);
 }
 
 .stack-block {
@@ -367,13 +388,9 @@ ul {
 .stack-block h3,
 .experience-groups h4,
 .additional-grid h3 {
-  font-size: 14px;
+  font-size: var(--text-label);
   line-height: 1.35;
   font-weight: 700;
-}
-
-.stack-block p {
-  margin-top: 4px;
 }
 
 .technology-tags {
@@ -391,13 +408,8 @@ ul {
   border-radius: 6px;
   color: var(--meta);
   background: color-mix(in srgb, var(--paper) 80%, var(--canvas));
-  font-size: 12.5px;
+  font-size: var(--text-caption);
   line-height: 1.35;
-}
-
-.experience-timeline {
-  padding-left: 20px;
-  border-left: 1px solid var(--line);
 }
 
 .experience-section .section-title {
@@ -437,7 +449,7 @@ ul {
   align-items: center;
   gap: 8px;
   color: var(--meta);
-  font-size: 13.5px;
+  font-size: var(--text-meta);
   line-height: 1.3;
   min-width: 0;
 }
@@ -446,14 +458,17 @@ ul {
   flex: 0 0 auto;
 }
 
-.experience-company { font-size: 15px; font-weight: 600; }
+.experience-company {
+  font-size: var(--text-company);
+  font-weight: 600;
+}
 
 .experience-period {
   flex: 1 1 180px;
   flex-wrap: wrap;
   gap: 6px 8px;
   color: var(--muted);
-  font-size: 12.5px;
+  font-size: var(--text-caption);
 }
 
 .company-description {
@@ -527,17 +542,12 @@ ul {
   }
 
   .cv-header {
-    grid-template-columns: 78px minmax(0, 1fr);
-    column-gap: 20px;
+    --portrait-width: 78px;
+    --portrait-height: 104px;
+    --portrait-radius: 18px;
+    --portrait-gap: 20px;
+    --portrait-row: 1;
     row-gap: 16px;
-  }
-
-  .portrait-trigger,
-  .portrait {
-    grid-row: 1;
-    width: 78px;
-    height: 104px;
-    border-radius: 18px;
   }
 
   .identity-copy h1 {
@@ -546,7 +556,7 @@ ul {
 
   .role {
     margin-top: 9px;
-    font-size: 12px;
+    font-size: var(--text-small);
     line-height: 1.35;
   }
 
@@ -565,8 +575,6 @@ ul {
     margin-top: 31px;
   }
 
-  .experience-timeline { padding-left: 14px; }
-
   .experience {
     padding-block: 24px;
   }
@@ -574,24 +582,22 @@ ul {
   .experience-header h3 {
     font-size: 22px;
   }
-
 }
 
 @media (max-width: 480px) {
+  :root {
+    --text-body: 14px;
+  }
+
   .resume {
     padding-inline: 18px;
   }
 
   .cv-header {
-    grid-template-columns: 70px minmax(0, 1fr);
-    column-gap: 15px;
-  }
-
-  .portrait-trigger,
-  .portrait {
-    width: 70px;
-    height: 94px;
-    border-radius: 16px;
+    --portrait-width: 70px;
+    --portrait-height: 94px;
+    --portrait-radius: 16px;
+    --portrait-gap: 15px;
   }
 
   .identity-copy h1 {
@@ -603,14 +609,6 @@ ul {
     letter-spacing: 0.085em;
   }
 
-  .profile-copy p,
-  .stack-block p,
-  .company-description,
-  .experience li,
-  .additional-grid p {
-    font-size: 14px;
-  }
-
   .section-title {
     letter-spacing: 0.16em;
   }
@@ -620,7 +618,6 @@ ul {
   html {
     scroll-behavior: auto;
   }
-
 }
 
 .experience-duration {
@@ -628,18 +625,24 @@ ul {
   padding-left: 8px;
   border-left: 1px solid var(--line);
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 
 /* Печатный вид используется и браузером, и генератором PDF. */
-@page { size: A4; margin: 13mm 14mm; }
+@page {
+  size: A4;
+  margin: 13mm 14mm;
+}
 @media print {
-  :root, :root[data-theme='dark'] {
+  :root,
+  :root[data-theme='dark'] {
     --ink: #171717;
     --muted: #454545;
     --line: #ddddda;
     --paper: #ffffff;
     --canvas: #ffffff;
+    --text-body: 9pt;
+    --body-leading: 1.4;
     --contact: #2e2e2e;
     --meta: #353535;
     --link-line: #b8b8b3;
@@ -647,46 +650,163 @@ ul {
     color-scheme: light;
     background: white;
   }
-  body { background: white; }
-  body, #app { min-width: 0; min-height: 0; }
-  .page-shell { width: 100%; padding: 0; margin: 0; }
-  .page-actions { display: none; }
-  .resume { padding: 0; box-shadow: none; }
-  .cv-header { grid-template-columns: 60px minmax(0, 1fr); column-gap: 20px; row-gap: 8px; margin-bottom: 17px; }
-  .portrait-trigger, .portrait-dialog { display: none !important; }
-  .portrait-print { display: block; }
-  .portrait { grid-row: 1 / 4; width: 60px; height: 80px; border-radius: 12px; }
-  .identity-copy h1 { font-size: 30px; }
-  .role { margin-top: 8px; font-size: 10px; }
-  .contacts { grid-column: 2; display: flex; gap: 8px 17px; margin: 0; }
-  .contact { font-size: 10px; }
-  .contact svg, .experience-meta svg, .company-logo { width: 12px; height: 12px; }
-  .site-footer { display: none; }
-  .resume-section + .resume-section { margin-top: 18px; }
-  .section-title { margin-bottom: 12px; font-size: 11px; break-after: avoid; }
-  .profile-copy { gap: 10px; }
-  .profile-copy p, .stack-block p, .company-description, .experience li, .additional-grid p { font-size: 9pt; line-height: 1.4; }
-  .stack-block { margin-top: 12px; }
-  .technology-tags { display: block; margin-top: 4px; padding: 0; font-size: 9pt; line-height: 1.4; color: var(--muted); }
-  .technology-tags li { display: inline; margin: 0; padding: 0; border: 0; border-radius: 0; color: inherit; background: none; font-size: inherit; line-height: inherit; }
-  .technology-tags li:not(:last-child)::after { content: ', '; }
-  .experience-timeline { padding: 0; border: 0; }
-  .stack-block h3, .experience-groups h4 { font-size: 9pt; break-after: avoid; }
-  .experience { padding-block: 14px; }
-  .experience-header { gap: 6px; break-after: avoid; }
-  .experience-context { gap: 6px 12px; }
-  .experience-period { flex-basis: 200px; }
-  .experience-header h3 { font-size: 17px; }
-  .experience-meta { font-size: 10px; }
-  .experience-period { font-size: 10px; }
-  .experience-duration { padding-left: 8px; font-size: 10px; }
-  .company-description { margin-top: 10px; }
-  .experience-groups { gap: 10px; margin-top: 10px; }
-  .experience-groups h4 { margin-bottom: 5px; }
-  .experience li { break-inside: avoid; }
-  .experience li + li { margin-top: 2px; }
-  .additional-grid { gap: 14px; }
-  .additional-grid article { break-inside: avoid; }
-  .additional-grid h3 { margin-bottom: 5px; font-size: 13px; }
-  p, li { orphans: 3; widows: 3; }
+  body {
+    background: white;
+  }
+  body,
+  #app {
+    min-width: 0;
+    min-height: 0;
+  }
+  .page-shell {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  .page-actions {
+    display: none;
+  }
+  .resume {
+    padding: 0;
+    box-shadow: none;
+  }
+  .cv-header {
+    --portrait-width: 60px;
+    --portrait-height: 80px;
+    --portrait-radius: 12px;
+    --portrait-gap: 20px;
+    --portrait-row: 1 / 4;
+    row-gap: 8px;
+    margin-bottom: 17px;
+  }
+  .portrait-trigger,
+  .portrait-dialog {
+    display: none !important;
+  }
+  .portrait-print {
+    display: block;
+  }
+  .identity-copy h1 {
+    font-size: 30px;
+  }
+  .role {
+    margin-top: 8px;
+    font-size: 10px;
+  }
+  .contacts {
+    grid-column: 2;
+    display: flex;
+    gap: 8px 17px;
+    margin: 0;
+  }
+  .contact {
+    font-size: 10px;
+  }
+  .contact svg,
+  .experience-meta svg,
+  .company-logo {
+    width: 12px;
+    height: 12px;
+  }
+  .site-footer {
+    display: none;
+  }
+  .resume-section + .resume-section {
+    margin-top: 18px;
+  }
+  .section-title {
+    margin-bottom: 12px;
+    font-size: 11px;
+    break-after: avoid;
+  }
+  .profile-copy {
+    gap: 10px;
+  }
+  .stack-block {
+    margin-top: 12px;
+  }
+  .technology-tags {
+    display: block;
+    margin-top: 4px;
+    padding: 0;
+    font-size: 9pt;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  .technology-tags li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    color: inherit;
+    background: none;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  .technology-tags li:not(:last-child)::after {
+    content: ', ';
+  }
+  .stack-block h3,
+  .experience-groups h4 {
+    font-size: 9pt;
+    break-after: avoid;
+  }
+  .experience {
+    padding-block: 14px;
+  }
+  .experience-header {
+    gap: 6px;
+    break-after: avoid;
+  }
+  .experience-context {
+    gap: 6px 12px;
+  }
+  .experience-period {
+    flex-basis: 200px;
+  }
+  .experience-header h3 {
+    font-size: 17px;
+  }
+  .experience-meta {
+    font-size: 10px;
+  }
+  .experience-period {
+    font-size: 10px;
+  }
+  .experience-duration {
+    padding-left: 8px;
+    font-size: 10px;
+  }
+  .company-description {
+    margin-top: 10px;
+  }
+  .experience-groups {
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .experience-groups h4 {
+    margin-bottom: 5px;
+  }
+  .experience li {
+    break-inside: avoid;
+  }
+  .experience li + li {
+    margin-top: 2px;
+  }
+  .additional-grid {
+    gap: 14px;
+  }
+  .additional-grid article {
+    break-inside: avoid;
+  }
+  .additional-grid h3 {
+    margin-bottom: 5px;
+    font-size: 13px;
+  }
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
 }

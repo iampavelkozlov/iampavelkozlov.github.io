@@ -1,4 +1,17 @@
-const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
+const months = [
+  'Январь',
+  'Февраль',
+  'Март',
+  'Апрель',
+  'Май',
+  'Июнь',
+  'Июль',
+  'Август',
+  'Сентябрь',
+  'Октябрь',
+  'Ноябрь',
+  'Декабрь',
+]
 
 export const isMonth = (value: unknown): value is string =>
   typeof value === 'string' && /^(?!0000)\d{4}-(0[1-9]|1[0-2])$/.test(value)
@@ -6,7 +19,8 @@ export const isMonth = (value: unknown): value is string =>
 const monthIndex = (value: string) => Number(value.slice(0, 4)) * 12 + Number(value.slice(5)) - 1
 
 export function formatPeriod(start: string, end: string | null) {
-  const format = (value: string) => isMonth(value) ? `${months[Number(value.slice(5)) - 1]} ${value.slice(0, 4)}` : 'Укажите дату'
+  const format = (value: string) =>
+    isMonth(value) ? `${months[Number(value.slice(5)) - 1]} ${value.slice(0, 4)}` : 'Укажите дату'
   return `${format(start)} — ${end === null ? 'Настоящее время' : format(end)}`
 }
 
@@ -23,5 +37,10 @@ export function formatDuration(start: string, end: string | null, now = new Date
   if (total <= 0) return ''
   const years = Math.floor(total / 12)
   const remainder = total % 12
-  return [years ? plural(years, ['год', 'года', 'лет']) : '', remainder ? plural(remainder, ['месяц', 'месяца', 'месяцев']) : ''].filter(Boolean).join(' ')
+  return [
+    years ? plural(years, ['год', 'года', 'лет']) : '',
+    remainder ? plural(remainder, ['месяц', 'месяца', 'месяцев']) : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
 }

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dist-ssr/
+output/
+tmp/
+public/
+pnpm-lock.yaml
+# Written by the admin with JSON.stringify; keep its canonical format.
+src/data/cv.json
+# Preserve the SEO shell and Yandex counter snippet verbatim.
+index.html

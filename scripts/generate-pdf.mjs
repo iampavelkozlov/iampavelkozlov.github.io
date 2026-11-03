@@ -9,4 +9,6 @@ try {
   const html = await readFile(resolve('dist/index.html'), 'utf8')
   await writeFile(resolve('dist/CV.pdf'), await renderPdf(html, baseUrl))
   console.log('PDF generated: dist/CV.pdf')
-} finally { await new Promise(resolve => server.httpServer.close(resolve)) }
+} finally {
+  await new Promise((resolve) => server.httpServer.close(resolve))
+}

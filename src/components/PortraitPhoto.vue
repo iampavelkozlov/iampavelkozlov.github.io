@@ -23,24 +23,73 @@ function restoreScroll() {
 }
 
 function closeOnBackdrop(event: MouseEvent) {
-  if (event.target !== dialog.value) return
-  const rect = dialog.value!.getBoundingClientRect()
-  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.value?.close()
+  const viewer = dialog.value
+  if (!viewer || event.target !== viewer) return
+  const rect = viewer.getBoundingClientRect()
+  if (
+    event.clientX < rect.left ||
+    event.clientX > rect.right ||
+    event.clientY < rect.top ||
+    event.clientY > rect.bottom
+  )
+    viewer.close()
 }
 
 onUnmounted(restoreScroll)
 </script>
 
 <template>
-  <button class="portrait-trigger" type="button" :aria-label="`Увеличить фотографию ${name}`" aria-haspopup="dialog" :aria-controls="dialogId" title="Увеличить фото" @click="open">
-    <img class="portrait" :src="src" alt="" />
-    <ZoomIn class="portrait-zoom" :size="16" :stroke-width="1.8" aria-hidden="true" />
+  <button
+    class="portrait-trigger"
+    type="button"
+    :aria-label="`Увеличить фотографию ${name}`"
+    aria-haspopup="dialog"
+    :aria-controls="dialogId"
+    title="Увеличить фото"
+    @click="open"
+  >
+    <img
+      class="portrait"
+      :src="src"
+      alt=""
+    />
+    <ZoomIn
+      class="portrait-zoom"
+      :size="16"
+      :stroke-width="1.8"
+      aria-hidden="true"
+    />
   </button>
-  <img class="portrait portrait-print" :src="src" :alt="`Фотография ${name}`" />
-  <dialog :id="dialogId" ref="dialog" class="portrait-dialog" :aria-label="`Фотография ${name}`" @click="closeOnBackdrop" @close="restoreScroll">
-    <button class="portrait-close" type="button" aria-label="Закрыть фотографию" autofocus @click="dialog?.close()">
-      <X :size="20" :stroke-width="1.8" aria-hidden="true" />
+  <img
+    class="portrait portrait-print"
+    :src="src"
+    :alt="`Фотография ${name}`"
+  />
+  <dialog
+    :id="dialogId"
+    ref="dialog"
+    class="portrait-dialog"
+    :aria-label="`Фотография ${name}`"
+    @click="closeOnBackdrop"
+    @close="restoreScroll"
+  >
+    <button
+      class="portrait-close"
+      type="button"
+      aria-label="Закрыть фотографию"
+      autofocus
+      @click="dialog?.close()"
+    >
+      <X
+        :size="20"
+        :stroke-width="1.8"
+        aria-hidden="true"
+      />
     </button>
-    <img class="portrait-large" :src="src" :alt="`Фотография ${name}`" />
+    <img
+      class="portrait-large"
+      :src="src"
+      :alt="`Фотография ${name}`"
+    />
   </dialog>
 </template>

@@ -9,7 +9,12 @@ const props = defineProps<{
   now: Date
 }>()
 const failedLogo = ref(false)
-watch(() => props.experience.companyLogo, () => { failedLogo.value = false })
+watch(
+  () => props.experience.companyLogo,
+  () => {
+    failedLogo.value = false
+  },
+)
 </script>
 
 <template>
@@ -17,16 +22,42 @@ watch(() => props.experience.companyLogo, () => { failedLogo.value = false })
     <header class="experience-header">
       <div class="experience-context">
         <p class="experience-meta experience-company">
-          <img v-if="experience.companyUrl && experience.companyLogo && !failedLogo" class="company-logo" :src="experience.companyLogo" alt="" width="17" height="17" @error="failedLogo = true" />
-          <BriefcaseBusiness v-else :size="17" :stroke-width="1.9" aria-hidden="true" />
-          <a v-if="experience.companyUrl" class="company-link" :href="experience.companyUrl" target="_blank" rel="noopener noreferrer">{{ experience.company }}</a>
+          <img
+            v-if="experience.companyUrl && experience.companyLogo && !failedLogo"
+            class="company-logo"
+            :src="experience.companyLogo"
+            alt=""
+            width="17"
+            height="17"
+            @error="failedLogo = true"
+          />
+          <BriefcaseBusiness
+            v-else
+            :size="17"
+            :stroke-width="1.9"
+            aria-hidden="true"
+          />
+          <a
+            v-if="experience.companyUrl"
+            class="company-link"
+            :href="experience.companyUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            >{{ experience.company }}</a
+          >
           <span v-else>{{ experience.company }}</span>
         </p>
 
         <p class="experience-meta experience-period">
-          <CalendarDays :size="17" :stroke-width="1.9" aria-hidden="true" />
+          <CalendarDays
+            :size="17"
+            :stroke-width="1.9"
+            aria-hidden="true"
+          />
           <span>{{ formatPeriod(experience.startDate, experience.endDate) }}</span>
-          <span class="experience-duration">{{ formatDuration(experience.startDate, experience.endDate, now) }}</span>
+          <span class="experience-duration">{{
+            formatDuration(experience.startDate, experience.endDate, now)
+          }}</span>
         </p>
       </div>
       <h3>{{ experience.role }}</h3>
@@ -35,10 +66,18 @@ watch(() => props.experience.companyLogo, () => { failedLogo.value = false })
     <p class="company-description">{{ experience.description }}</p>
 
     <div class="experience-groups">
-      <section v-for="group in experience.groups" :key="group.title || group.highlights[0]">
+      <section
+        v-for="group in experience.groups"
+        :key="group.title || group.highlights[0]"
+      >
         <h4 v-if="group.title">{{ group.title }}</h4>
         <ul>
-          <li v-for="highlight in group.highlights" :key="highlight">{{ highlight }}</li>
+          <li
+            v-for="highlight in group.highlights"
+            :key="highlight"
+          >
+            {{ highlight }}
+          </li>
         </ul>
       </section>
     </div>

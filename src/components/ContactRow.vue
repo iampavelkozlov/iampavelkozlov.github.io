@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import {
-  ExternalLink,
-  Link as LinkIcon,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-} from '@lucide/vue'
+import { Link as LinkIcon, Mail, MapPin, Phone, Send } from '@lucide/vue'
 import type { Component } from 'vue'
 import { reachGoal } from '../lib/analytics'
 import type { Contact } from '../types/cv'
@@ -41,8 +34,14 @@ const contactGoal = (contact: Contact) => {
 </script>
 
 <template>
-  <address class="contacts" :aria-label="label">
-    <template v-for="contact in contacts" :key="contact.label">
+  <address
+    class="contacts"
+    :aria-label="label"
+  >
+    <template
+      v-for="contact in contacts"
+      :key="contact.label"
+    >
       <a
         v-if="contact.href"
         class="contact"
@@ -51,13 +50,25 @@ const contactGoal = (contact: Contact) => {
         :rel="isExternal(contact.href) ? 'noreferrer' : undefined"
         @click="reachGoal(contactGoal(contact))"
       >
-        <component :is="icons[contact.icon]" :size="17" :stroke-width="1.9" aria-hidden="true" />
+        <component
+          :is="icons[contact.icon]"
+          :size="17"
+          :stroke-width="1.9"
+          aria-hidden="true"
+        />
         <span>{{ contact.label }}</span>
-        <ExternalLink v-if="isExternal(contact.href)" class="external-mark" :size="11" />
       </a>
 
-      <span v-else class="contact contact--plain">
-        <component :is="icons[contact.icon]" :size="17" :stroke-width="1.9" aria-hidden="true" />
+      <span
+        v-else
+        class="contact"
+      >
+        <component
+          :is="icons[contact.icon]"
+          :size="17"
+          :stroke-width="1.9"
+          aria-hidden="true"
+        />
         <span>{{ contact.label }}</span>
       </span>
     </template>

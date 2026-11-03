@@ -25,7 +25,8 @@ test('периоды, включённые месяцы, текущая рабо
     ['2021-01', '2020-12', ''],
     ['', null, ''],
     ['2025-13', null, ''],
-  ]) assert.equal(formatDuration(start, end), expected)
+  ])
+    assert.equal(formatDuration(start, end), expected)
   assert.equal(formatDuration('2025-10', null, new Date(2026, 10, 3)), '1 год 2 месяца')
   assert.equal(formatDuration('2027-01', null, new Date(2026, 10, 3)), '')
 })
@@ -46,31 +47,40 @@ test('атомарная запись и отказ при конфликте и
     await mkdir(join(root, 'src/data'), { recursive: true })
     await writeFile(join(root, dataPath), JSON.stringify(original))
     const first = await readCv(root)
-    const next = structuredClone(original); next.name = 'Новое имя'
+    const next = structuredClone(original)
+    next.name = 'Новое имя'
     const saved = await saveCv(root, next, first.revision)
     assert.equal((await readCv(root)).data.name, 'Новое имя')
     await assert.rejects(saveCv(root, original, first.revision), { status: 409 })
     await assert.rejects(saveCv(root, {}, saved.revision), { status: 422 })
     assert.equal((await readCv(root)).revision, saved.revision)
-  } finally { await rm(root, { recursive: true, force: true }) }
+  } finally {
+    await rm(root, { recursive: true, force: true })
+  }
 })
 
 test('публикация коммитит только данные, сохраняет чужой index и повторяет push после ошибки', async () => {
   const temp = await mkdtemp(join(tmpdir(), 'cv-git-'))
-  const root = join(temp, 'work'); const remote = join(temp, 'remote.git')
-  const git = async (...args) => (await run('git', ['-c', 'commit.gpgsign=false', ...args], { cwd: root })).stdout.trim()
+  const root = join(temp, 'work')
+  const remote = join(temp, 'remote.git')
+  const git = async (...args) =>
+    (await run('git', ['-c', 'commit.gpgsign=false', ...args], { cwd: root })).stdout.trim()
   try {
     await mkdir(root)
     await run('git', ['init', '--bare', remote])
     await git('init', '-b', 'main')
-    await git('config', 'user.email', 'test@example.com'); await git('config', 'user.name', 'CV test')
+    await git('config', 'user.email', 'test@example.com')
+    await git('config', 'user.name', 'CV test')
     await git('config', 'commit.gpgsign', 'false')
     await writeFile(join(root, 'unrelated.txt'), 'before\n')
-    await git('add', '.'); await git('commit', '-m', 'Initial')
-    await git('remote', 'add', 'origin', remote); await git('push', '-u', 'origin', 'main')
+    await git('add', '.')
+    await git('commit', '-m', 'Initial')
+    await git('remote', 'add', 'origin', remote)
+    await git('push', '-u', 'origin', 'main')
     await mkdir(join(root, 'src/data'), { recursive: true })
     await writeFile(join(root, dataPath), JSON.stringify(original))
-    await writeFile(join(root, 'unrelated.txt'), 'after\n'); await git('add', 'unrelated.txt')
+    await writeFile(join(root, 'unrelated.txt'), 'after\n')
+    await git('add', 'unrelated.txt')
     const published = await publishCv(root)
     assert.equal(published.branch, 'main')
     assert.equal(await git('show', '--format=', '--name-only', 'HEAD'), dataPath)
@@ -84,7 +94,9 @@ test('публикация коммитит только данные, сохр�
     await publishCv(root)
     assert.equal(await git('rev-parse', 'HEAD'), committed)
     assert.equal(await git('rev-parse', 'origin/main'), committed)
-  } finally { await rm(temp, { recursive: true, force: true }) }
+  } finally {
+    await rm(temp, { recursive: true, force: true })
+  }
 })
 
 test('метаданные берутся из данных и экранируют HTML', async () => {
@@ -96,7 +108,18 @@ test('метаданные берутся из данных и экраниру�
   const rendered = withCvMetadata(html, data)
   assert.ok(rendered.includes('<title>Тест &lt;имя&gt; &amp; проверка —'))
   assert.ok(rendered.includes('content="Описание &quot;резюме&quot; &lt;/script&gt;"'))
-  const schema = JSON.parse(rendered.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])
+  const schema = JSON.parse(
+    rendered.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1],
+  )
   assert.equal(schema['@graph'][1].mainEntity.name, data.name)
   assert.equal(schema['@graph'][1].description, data.summary[0])
+})
+
+test('группы контактов сохраняют старую автоматическую классификацию и ручной выбор', async () => {
+  const { getContactGroup } = await import('../src/lib/contacts.ts')
+  assert.equal(getContactGroup({ icon: 'telegram' }), 'contact')
+  assert.equal(getContactGroup({ icon: 'link' }), 'profile')
+  assert.equal(getContactGroup({ icon: 'github' }), 'profile')
+  assert.equal(getContactGroup({ icon: 'link', group: 'contact' }), 'contact')
+  assert.equal(getContactGroup({ icon: 'phone', group: 'profile' }), 'profile')
 })

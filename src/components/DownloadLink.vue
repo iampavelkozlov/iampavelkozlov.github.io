@@ -14,7 +14,11 @@ defineProps<{
     download="Pavel-Kozlov-CV.pdf"
     @click="reachGoal('pdf_download')"
   >
-    <Download :size="15" :stroke-width="1.8" aria-hidden="true" />
+    <Download
+      :size="15"
+      :stroke-width="1.8"
+      aria-hidden="true"
+    />
     <span>Скачать PDF</span>
   </a>
 </template>

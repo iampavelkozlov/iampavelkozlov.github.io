@@ -1,10 +1,10 @@
-export type ContactIcon = 'phone' | 'email' | 'telegram' | 'link' | 'location' | 'github' | 'leetcode'
+import type { ContactGroup, ContactIcon } from '../lib/contacts.ts'
 
 export interface Contact {
   icon: ContactIcon
   label: string
   href?: string
-  group?: 'contact' | 'profile'
+  group?: ContactGroup
 }
 
 export interface ExperienceGroup {

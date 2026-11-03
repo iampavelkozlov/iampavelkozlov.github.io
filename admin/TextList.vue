@@ -8,14 +8,51 @@ function move(index: number, offset: number) {
 </script>
 <template>
   <div class="text-list">
-    <div v-for="(_, index) in model" :key="index" class="list-row">
-      <label>{{ label }} {{ index + 1 }}<textarea v-model="model[index]" rows="2" /></label>
+    <div
+      v-for="(_, index) in model"
+      :key="index"
+      class="list-row"
+    >
+      <label
+        >{{ label }} {{ index + 1
+        }}<textarea
+          v-model="model[index]"
+          rows="2"
+        />
+      </label>
       <div class="row-actions">
-        <button type="button" :disabled="index === 0" :aria-label="`${label} ${index + 1}: выше`" @click="move(index, -1)">↑</button>
-        <button type="button" :disabled="index === model.length - 1" :aria-label="`${label} ${index + 1}: ниже`" @click="move(index, 1)">↓</button>
-        <button type="button" class="danger" :aria-label="`${label} ${index + 1}: удалить`" @click="model.splice(index, 1)">Удалить</button>
+        <button
+          type="button"
+          :disabled="index === 0"
+          :aria-label="`${label} ${index + 1}: выше`"
+          @click="move(index, -1)"
+        >
+          ↑
+        </button>
+        <button
+          type="button"
+          :disabled="index === model.length - 1"
+          :aria-label="`${label} ${index + 1}: ниже`"
+          @click="move(index, 1)"
+        >
+          ↓
+        </button>
+        <button
+          type="button"
+          class="danger"
+          :aria-label="`${label} ${index + 1}: удалить`"
+          @click="model.splice(index, 1)"
+        >
+          Удалить
+        </button>
       </div>
     </div>
-    <button type="button" class="add-button" @click="model.push('')">+ {{ label }}</button>
+    <button
+      type="button"
+      class="add-button"
+      @click="model.push('')"
+    >
+      + {{ label }}
+    </button>
   </div>
 </template>
