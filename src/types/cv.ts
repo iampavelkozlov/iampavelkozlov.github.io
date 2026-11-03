@@ -14,7 +14,10 @@ export interface ExperienceGroup {
 export interface Experience {
   role: string
   company: string
-  period: string
+  companyUrl?: string
+  companyLogo?: string
+  startDate: string
+  endDate: string | null
   description: string
   groups: ExperienceGroup[]
 }

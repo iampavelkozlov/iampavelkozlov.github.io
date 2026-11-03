@@ -6,8 +6,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build && vite build --ssr src/entry-server.ts --outDir dist/server && node scripts/prerender.mjs",
-    "preview": "vite preview"
+    "build": "pnpm build:site && pnpm pdf",
+    "preview": "vite preview",
+    "admin": "node scripts/admin.mjs",
+    "build:site": "vue-tsc -b && vite build && vite build --ssr src/entry-server.ts --outDir dist/server && node scripts/prerender.mjs",
+    "pdf": "node scripts/generate-pdf.mjs",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@fontsource/inter": "^5.3.0",
@@ -19,8 +23,12 @@
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/server-renderer": "^3.5.42",
     "@vue/tsconfig": "^0.9.1",
+    "playwright": "^1.64.1",
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
     "vue-tsc": "^3.3.11"
+  },
+  "engines": {
+    "node": ">=22.18.0"
   }
 }
