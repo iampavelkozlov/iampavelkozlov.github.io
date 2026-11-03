@@ -22,7 +22,8 @@ export function validateCv(value: unknown): string[] {
     const path = `Контакт ${i + 1}`
     if (!object(contact)) { errors.push(`${path}: неверный формат`); return }
     text(contact.label, path)
-    if (!['phone', 'email', 'telegram', 'link', 'location'].includes(String(contact.icon))) errors.push(`${path}: выберите иконку`)
+    if (!['phone', 'email', 'telegram', 'link', 'location', 'github', 'leetcode'].includes(String(contact.icon))) errors.push(`${path}: выберите иконку`)
+    if (contact.group !== undefined && !['contact', 'profile'].includes(String(contact.group))) errors.push(`${path}: выберите группу контакта`)
     if (contact.href !== undefined) {
       text(contact.href, `${path}, ссылка`, true)
       if (typeof contact.href === 'string' && contact.href && !/^(https?:\/\/|mailto:|tel:)/i.test(contact.href)) errors.push(`${path}: допустимы http, https, mailto и tel`)

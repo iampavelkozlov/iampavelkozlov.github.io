@@ -1,9 +1,10 @@
-export type ContactIcon = 'phone' | 'email' | 'telegram' | 'link' | 'location'
+export type ContactIcon = 'phone' | 'email' | 'telegram' | 'link' | 'location' | 'github' | 'leetcode'
 
 export interface Contact {
   icon: ContactIcon
   label: string
   href?: string
+  group?: 'contact' | 'profile'
 }
 
 export interface ExperienceGroup {

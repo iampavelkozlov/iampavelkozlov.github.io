@@ -6,26 +6,37 @@
     {
       "icon": "phone",
       "label": "+7 966 068 44 35",
-      "href": "tel:+79660684435"
+      "href": "tel:+79660684435",
+      "group": "contact"
     },
     {
       "icon": "email",
       "label": "it.pavelkozlov@gmail.com",
-      "href": "mailto:it.pavelkozlov@gmail.com"
+      "href": "mailto:it.pavelkozlov@gmail.com",
+      "group": "contact"
     },
     {
       "icon": "telegram",
       "label": "Telegram",
-      "href": "https://t.me/pav_kozlov"
+      "href": "https://t.me/pav_kozlov",
+      "group": "contact"
     },
     {
-      "icon": "link",
-      "label": "Leetcode",
-      "href": "https://leetcode.com/u/user4840t/"
+      "icon": "leetcode",
+      "label": "LeetCode",
+      "href": "https://leetcode.com/u/user4840t/",
+      "group": "profile"
+    },
+    {
+      "icon": "github",
+      "label": "GitHub",
+      "href": "https://github.com/iampavelkozlov",
+      "group": "profile"
     },
     {
       "icon": "location",
-      "label": "Москва, Россия"
+      "label": "Москва, Россия",
+      "group": "contact"
     }
   ],
   "summary": [

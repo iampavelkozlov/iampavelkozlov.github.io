@@ -23,7 +23,7 @@ let pending: Promise<void> | undefined
 let applyingLogos = false
 const errors = computed(() => draft.value ? validateCv(draft.value) : [])
 const dirty = computed(() => savedVersion.value !== version.value)
-const icons = { phone: 'Телефон', email: 'Почта', telegram: 'Telegram', link: 'Ссылка', location: 'Город' }
+const icons = { phone: 'Телефон', email: 'Почта', telegram: 'Telegram', link: 'Ссылка', location: 'Город', github: 'GitHub', leetcode: 'LeetCode' }
 
 function sendPreview() {
   if (draft.value) preview.value?.contentWindow?.postMessage({ type: 'cv-preview', data: JSON.parse(JSON.stringify(draft.value)) }, location.origin)
@@ -155,6 +155,7 @@ onUnmounted(() => { clearTimeout(timer); resetPdf(); window.removeEventListener(
           <details class="editor-section"><summary>Контакты</summary><div class="section-fields">
             <div v-for="(contact, index) in draft.contacts" :key="index" class="nested-card">
               <label>Иконка<select v-model="contact.icon"><option v-for="(label, value) in icons" :key="value" :value="value">{{ label }}</option></select></label>
+              <label>Группа<select v-model="contact.group"><option :value="undefined">Автоматически по иконке</option><option value="contact">Связаться: телефон, почта, Telegram, город</option><option value="profile">Профили: LeetCode, GitHub, LinkedIn и другие</option></select></label>
               <label>Подпись<input v-model="contact.label" /></label>
               <label>Ссылка<input v-model="contact.href" placeholder="https://, mailto: или tel:" /></label>
               <button type="button" class="danger" @click="draft.contacts.splice(index, 1)">Удалить контакт</button>
